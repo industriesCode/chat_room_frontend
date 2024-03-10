@@ -1,12 +1,16 @@
 import './App.css';
 import Header from "./components/header";
 import Sidebar from "./components/sidebar";
+import Chat from "./components/chat";
 
 function App() {
   return (
     <div>
-        < Header/>
-        <Sidebar/>
+        <div className={"flex flex-col h-screen"}>
+            < Header/>
+            < Chat/>
+        </div>
+        < Sidebar/>
     </div>
   );
 }
