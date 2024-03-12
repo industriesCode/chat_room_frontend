@@ -1,7 +1,7 @@
 import transparentLogo from '../img/logo/logo Transparent.png'
-const Sidebar = () => {
+const Sidebar = ({toggle}) => {
     return(
-        <aside className="flex flex-col sidebar bg-gray-50 shadow-2xl text-white h-screen fixed top-0 left-0 overflow-y-auto w-max md:w-56 md:transform-none">
+        <aside className={"flex flex-col sidebar bg-gray-50 shadow-2xl text-white h-screen fixed top-0 left-0 z-40 overflow-y-auto w-56 md:transform-none" + (toggle ? 'transition-all ease-in-out duration-300 transform -translate-x-full':'')}>
             <div className="flex-grow">
                  {/*Logo and Name*/}
                 <div className="relative text-center py-6 pt-0">
@@ -24,7 +24,14 @@ const Sidebar = () => {
                                 <li className="text-sm font-medium text-gray-500">Today</li>
 
                                 <li><span className="block py-1 px-4 text-xs text-bold hover:scale-105 transition-transform duration-100 cursor-pointer">Tungnath Trip</span></li>
-                                <li><span className="block py-1 px-4 text-xs text-bold hover:scale-105 transition-transform duration-100 cursor-pointer">Learn React</span></li>
+                                <li className={"flex items-center"}>
+                                    <span className="block py-1 px-4 text-xs text-bold hover:scale-105 transition-transform duration-100 cursor-pointer text-blue-400">Learn React</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                         strokeWidth="1.5" stroke="currentColor" className="w-3 h-3 text-blue-400 animate-bounce">
+                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                              d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"/>
+                                    </svg>
+                                </li>
                                 <li><span className="block py-1 px-4 text-xs text-bold hover:scale-105 transition-transform duration-100 cursor-pointer">StandUp Call</span></li>
                             </ul>
 
