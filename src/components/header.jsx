@@ -1,10 +1,10 @@
 import userProfile from '../img/profile/picture.jpg'
-const Header = ({ toggle, setToggle }) => {
+const Header = ({ sidebarToggle, setSidebarToggle }) => {
     return(
         <>
-            <header className="fixed top-0 z-30 w-screen bg-blue-300 drop-shadow-lg">
+            <header className="fixed top-0 z-30 w-full bg-blue-300 drop-shadow-lg">
                 <div className="flex justify-between items-center z-20 px-4 lg:px-8">
-                    <div onClick={(e) => setToggle(!toggle) }>
+                    <div onClick={(e) => setSidebarToggle(!sidebarToggle) }>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                              stroke="white" className="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round"

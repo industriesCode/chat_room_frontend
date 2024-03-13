@@ -1,7 +1,7 @@
 import transparentLogo from '../img/logo/logo Transparent.png'
-const Sidebar = ({toggle}) => {
+const Sidebar = ({sidebarToggle}) => {
     return(
-        <aside className={"flex flex-col sidebar bg-gray-50 shadow-2xl text-white h-screen fixed top-0 left-0 z-40 overflow-y-auto w-56 md:transform-none" + (toggle ? 'transition-all ease-in-out duration-300 transform -translate-x-full':'')}>
+        <aside className={"flex flex-col sidebar bg-gray-50 shadow-2xl text-white h-screen fixed top-0 left-0 z-40 overflow-y-auto w-56 md:transform-none" + (!sidebarToggle ? 'transition-all ease-in-out duration-300 transform -translate-x-full':'')}>
             <div className="flex-grow">
                  {/*Logo and Name*/}
                 <div className="relative text-center py-6 pt-0">

@@ -3,17 +3,25 @@ import Header from "./components/header";
 import Sidebar from "./components/sidebar";
 import Chat from "./components/chat";
 import {useState} from "react";
+import Login from "./components/login";
 
 function App() {
-    const [toggle, setToggle] = useState(true);
+    const [sidebarToggle, setSidebarToggle] = useState(false);
+    const [isLogin, setIsLogin] = useState(false);
+
+    console.log(isLogin)
 
     return (
     <div>
-        <div className={"flex flex-col h-screen"}>
-            < Header toggle={toggle} setToggle={setToggle} />
-            < Chat toggle={toggle} setToggle={setToggle} />
-        </div>
-        <Sidebar toggle={toggle} />
+        {!isLogin ? <Login isLogin={isLogin} setIsLogin={setIsLogin} /> :
+            <>
+                <div className={"flex flex-col h-screen w-full"}>
+                    < Header sidebarToggle={sidebarToggle} setSidebarToggle={setSidebarToggle} />
+                    < Chat sidebarToggle={sidebarToggle} setSidebarToggle={setSidebarToggle} />
+                </div>
+                <Sidebar sidebarToggle={sidebarToggle} />
+            </>
+        }
     </div>
   );
 }

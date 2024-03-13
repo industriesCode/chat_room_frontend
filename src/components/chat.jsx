@@ -1,12 +1,12 @@
-const Chat = ({toggle, setToggle}) => {
+const Chat = ({sidebarToggle, setSidebarToggle}) => {
     return(
-        <div className={"z-20 w-full md:pl-56 h-full p-5 mt-10"} onClick={(e) => setToggle(false) }>
-            <div className={"w-full h-full "}>
+        <div className={"flex flex-row z-20 w-full h-full p-5"} onClick={(e) => setSidebarToggle(false) }>
+            <div className={"w-full h-full pt-10"}>
                 <div className={"fixed z-20 flex flex-col md:p-5 md:ml-5 w-max"}>
                     <span className={"tracking-wider font-semibold custom-text-shadow text-gray-500 p-1 rounded"}>LEARN REACT</span>
                     <hr/>
                 </div>
-                <div className="fixed top-0 left-0 z-10 w-full h-28 md:h-1/6 bg-gradient-to-t from-white to-white pointer-events-none"></div>
+                <div className="fixed top-0 left-0 z-10 w-full h-20 md:h-28 bg-gradient-to-t from-white to-white pointer-events-none"></div>
                 <div className={"h-10 md:h-20"}></div>
                 <div className={"flex flex-col p-5 md:ml-5 w-max"}>
                     <small className={"flex group items-center sm:justify-start gap-x-3 font-semibold text-gray-500 mb-1"}>
