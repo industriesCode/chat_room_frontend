@@ -49,40 +49,47 @@
 
 /* For webkit-based browsers like Chrome, Safari, etc. */
 ::-webkit-scrollbar {
-  width: 5px; /* Adjust the width as needed */
+  width: 1px; /* Adjust the width as needed */
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
   background: #f1f1f1; /* Color of the track */
+  display: none;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888; /* Color of the scrollbar handle */
+  background: rgb(147 197 253); /* Color of the scrollbar handle */
   border-radius: 5px; /* Rounded corners of the scrollbar handle */
+  display: none;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; /* Color of the scrollbar handle on hover */
+  background: rgb(147 197 253); /* Color of the scrollbar handle on hover */
+  display: none;
 }
 
 
 .scrollbar::-webkit-scrollbar {
   height: 5px; /* Set the width of the scrollbar */
+  display: none;
 }
 
 .scrollbar::-webkit-scrollbar-track {
   background-color: #f1f1f1; /* Change the background color of the scrollbar track */
   border-radius: 5px;
+  display: none;
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
-  background-color: #888; /* Change the color of the scrollbar thumb */
+  background-color: rgb(147 197 253); /* Change the color of the scrollbar thumb */
   border-radius: 10px; /* Adjust the border radius */
+  display: none;
 }
 
 .scrollbar::-webkit-scrollbar-thumb:hover {
   background-color: #555; /* Change the color on hover */
+  display: none;
 }

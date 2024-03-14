@@ -45,8 +45,8 @@ const Login = ({isLogin, setIsLogin}) => {
         try {
             if(signupPassword === signupConfirmPassword) {
                 await axios.post('http://localhost:8000/signup/', {
-                    signupUsername,
-                    signupPassword,
+                    "username": signupUsername,
+                    "password": signupPassword
                 });
 
                 setIsLogin(true)
