@@ -1,11 +1,19 @@
 import transparentLogo from '../img/logo/logo Transparent.png'
-import {useState} from "react";
-const Sidebar = ({rooms, sidebarToggle}) => {
 
-    const [roomsToday, setRooms_today] = useState(rooms.today);
-    const [roomsYesterday, setRoomsYesterday] = useState(rooms.yesterday);
-    const [roomsOlder, setRoomsOlder] = useState(rooms.older);
-    const [roomClick, setRoomClick] = useState(false)
+const Sidebar = ({rooms, sidebarToggle, setSidebarToggle, setRoomClick}) => {
+
+    const roomsToday = rooms.today;
+    const roomsYesterday = rooms.yesterday;
+    const roomsOlder = rooms.older;
+
+    const setStates = (data) => {
+        console.log("---------------------")
+        console.log(data)
+        console.log("---------------------")
+        setSidebarToggle(false);
+        setRoomClick(data)
+    }
+
     return(
         <aside className={"flex flex-col sidebar bg-gray-50 shadow-2xl text-white h-screen fixed top-0 left-0 z-40 overflow-y-auto w-56 md:transform-none" + (!sidebarToggle ? 'transition-all ease-in-out duration-300 transform -translate-x-full':'')}>
             <div className="flex-grow">
@@ -31,7 +39,7 @@ const Sidebar = ({rooms, sidebarToggle}) => {
                                 { roomsToday.map((room, index) =>
                                     (
                                         <li className="flex items-center" key={ index }>
-                                            <span className="block py-1 px-4 text-xs text-bold hover:scale-105 transition-transform duration-100 cursor-pointer">{ room.name }</span>
+                                            <span className="block py-1 px-4 text-xs text-bold hover:scale-105 transition-transform duration-100 cursor-pointer" onClick={() => setStates(room.name)}>{ room.name }</span>
                                             {/* text-blue-400*/}
                                             {/*<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"*/}
                                             {/*     strokeWidth="1.5" stroke="currentColor" className="w-3 h-3 text-blue-400 animate-bounce">*/}
@@ -47,7 +55,9 @@ const Sidebar = ({rooms, sidebarToggle}) => {
                                 <li className="text-sm font-medium text-gray-500">Yesterday</li>
                                 { roomsYesterday.map((room, index) =>
                                     (
-                                        <li><span className="block py-1 px-4 text-xs text-bold hover:scale-105 transition-transform duration-100 cursor-pointer">{ room.name }</span></li>
+                                        <li className="flex items-center" key={ index }>
+                                            <span className="block py-1 px-4 text-xs text-bold hover:scale-105 transition-transform duration-100 cursor-pointer" onClick={() => setStates(room.name)}>{ room.name }</span>
+                                        </li>
                                     )
                                 )}
                             </ul>
@@ -56,7 +66,9 @@ const Sidebar = ({rooms, sidebarToggle}) => {
                                 <li className="text-sm font-medium text-gray-500">Old</li>
                                 { roomsOlder.map((room, index) =>
                                     (
-                                        <li><span className="block py-1 px-4 text-xs text-bold hover:scale-105 transition-transform duration-100 cursor-pointer">{ room.name }</span></li>
+                                        <li className="flex items-center" key={ index }>
+                                            <span className="block py-1 px-4 text-xs text-bold hover:scale-105 transition-transform duration-100 cursor-pointer" onClick={() => setStates(room.name)}>{ room.name }</span>
+                                        </li>
                                     )
                                 )}
                             </ul>

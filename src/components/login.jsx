@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import axios from 'axios';
-const Login = ({isLogin, setIsLogin}) => {
+const Login = ({setIsLogin, setUserData}) => {
 
     const [loginFormToggle, setLoginFormToggle] = useState(false);
     const [signupFormToggle, setSignupFormToggle] = useState(false);
@@ -29,12 +29,14 @@ const Login = ({isLogin, setIsLogin}) => {
     const handleSigninSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:8000/signin/', {
+            const resp = await axios.post('http://localhost:8000/signin/', {
                 username,
                 password,
             });
 
+            setUserData(resp.data.user)
             setIsLogin(true)
+
         } catch (error) {
             setError('Invalid username or password');
         }

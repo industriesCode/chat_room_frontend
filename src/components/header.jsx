@@ -1,6 +1,6 @@
 import userProfile from '../img/profile/picture.jpg'
 import {useState} from "react";
-const Header = ({ sidebarToggle, setSidebarToggle }) => {
+const Header = ({ sidebarToggle, setSidebarToggle, userData }) => {
     const [profilePopup, setProfilePopup] = useState(false);
     const [notificationPopup, setNotificationPopup] = useState(false);
 
@@ -96,6 +96,9 @@ const Header = ({ sidebarToggle, setSidebarToggle }) => {
                                         <div className="relative w-4 h-4 bg-white inset-x-20 -inset-y-2 rotate-45"></div>
                                     </div>
                                     <ul className="relative rounded text-sm text-gray-700 p-1" aria-labelledby="profile-button">
+                                        <li>
+                                            <span className="block px-3 py-2 font-normal text-black rounded-lg hover:bg-gray-100 cursor-pointer">{userData.username}</span>
+                                        </li>
                                         <li>
                                             <span className="block px-3 py-2 font-normal text-black rounded-lg hover:bg-gray-100 cursor-pointer">Dashboard</span>
                                         </li>
