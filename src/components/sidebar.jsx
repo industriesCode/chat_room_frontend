@@ -1,21 +1,21 @@
 import transparentLogo from '../img/logo/logo Transparent.png'
+import {useAppContext} from "../context/chatContextAPI";
 
-const Sidebar = ({rooms, sidebarToggle, setSidebarToggle, setRoomClick}) => {
+const Sidebar = () => {
 
-    const roomsToday = rooms.today;
-    const roomsYesterday = rooms.yesterday;
-    const roomsOlder = rooms.older;
+    const { state, dispatch } = useAppContext();
+
+    const roomsToday = state.rooms.today;
+    const roomsYesterday = state.rooms.yesterday;
+    const roomsOlder = state.rooms.older;
 
     const setStates = (data) => {
-        console.log("---------------------")
-        console.log(data)
-        console.log("---------------------")
-        setSidebarToggle(false);
-        setRoomClick(data)
+        dispatch({ type: 'SET_SIDEBAR_TOGGLE', payload: false })
+        dispatch({ type: 'SET_ROOM_CLICK', payload: data })
     }
 
     return(
-        <aside className={"flex flex-col sidebar bg-gray-50 shadow-2xl text-white h-screen fixed top-0 left-0 z-40 overflow-y-auto w-56 md:transform-none" + (!sidebarToggle ? 'transition-all ease-in-out duration-300 transform -translate-x-full':'')}>
+        <aside className={"flex flex-col sidebar bg-gray-50 shadow-2xl text-white h-screen fixed top-0 left-0 z-40 overflow-y-auto w-56 md:transform-none" + (state.sidebarToggle ? 'transition-all ease-in-out duration-300 transform -translate-x-full':'')}>
             <div className="flex-grow">
                  {/*Logo and Name*/}
                 <div className="relative text-center py-6 pt-0">

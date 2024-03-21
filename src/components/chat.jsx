@@ -1,23 +1,24 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import {useAppContext} from "../context/chatContextAPI";
 
-const Chat = ({addMessage, roomClick, setSidebarToggle, userData, messages}) => {
-    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+const Chat = ({addMessage}) => {
+    const { register, handleSubmit, reset } = useForm();
+    const { state, dispatch } = useAppContext();
 
-    console.log(messages)
     return(
-        <div className={"flex flex-col z-20 w-full h-full p-5"} onClick={(e) => setSidebarToggle(false) }>
+        <div className={"flex flex-col z-20 w-full h-full p-5"} onClick={(e) => dispatch({ type: 'SET_SIDEBAR_TOGGLE' }) }>
             <div className={"w-full h-full pt-10 overflow-y-auto"}>
                 <div className={"fixed z-20 flex flex-col md:p-5 md:ml-5 w-max"}>
-                    <span className={"tracking-wider font-semibold custom-text-shadow text-gray-500 p-1 rounded"}>{ roomClick }</span>
+                    <span className={"tracking-wider font-semibold custom-text-shadow text-gray-500 p-1 rounded"}>{ state.roomClick }</span>
                     <hr/>
                 </div>
                 <div className="fixed top-0 left-0 z-10 w-full h-20 md:h-28 bg-gradient-to-t from-white to-white pointer-events-none"></div>
                 <div className={"h-10 md:h-20"}></div>
 
-                {messages.map((message, index) => (
-                    <div key={index} className={message.sent_by === userData.username ? "flex flex-col items-end p-5 w-full" : "flex flex-col p-5 w-full"}>
-                        {message.sent_by !== userData.username ? (
+                {state.messages.map((message, index) => (
+                    <div key={index} className={message.sent_by === state.userData.username ? "flex flex-col items-end p-5 w-full" : "flex flex-col p-5 w-full"}>
+                        {message.sent_by !== state.userData.username ? (
                             <div className="flex flex-col">
                                 <small className="flex group items-center self-start gap-x-3 font-semibold text-gray-500 mb-1">
                     <span className="relative flex w-2 h-2 -mr-2 drop-shadow">

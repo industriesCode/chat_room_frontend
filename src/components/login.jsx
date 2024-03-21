@@ -1,6 +1,7 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import axios from 'axios';
-const Login = ({setIsLogin, setUserData}) => {
+import {useAppContext} from "../context/chatContextAPI";
+const Login = () => {
 
     const [loginFormToggle, setLoginFormToggle] = useState(false);
     const [signupFormToggle, setSignupFormToggle] = useState(false);
@@ -10,6 +11,7 @@ const Login = ({setIsLogin, setUserData}) => {
     const [signupPassword, setSignupPassword] = useState('');
     const [signupConfirmPassword, setSignupConfirmPassword] = useState('');
     const [error, setError] = useState('');
+    const { dispatch } = useAppContext();
 
     const signupClick = () => {
         setLoginFormToggle(false);
@@ -17,6 +19,7 @@ const Login = ({setIsLogin, setUserData}) => {
     };
 
     const signinClick = () => {
+        dispatch({ type: 'SET_SIDEBAR_TOGGLE', payload: true })
         setLoginFormToggle(true);
         setSignupFormToggle(false);
     };
@@ -34,8 +37,8 @@ const Login = ({setIsLogin, setUserData}) => {
                 password,
             });
 
-            setUserData(resp.data.user)
-            setIsLogin(true)
+            dispatch({ type: 'SET_USER_DATA', payload: resp.data.user })
+            dispatch({ type: 'SET_IS_LOGIN', payload: true })
 
         } catch (error) {
             setError('Invalid username or password');
@@ -51,7 +54,7 @@ const Login = ({setIsLogin, setUserData}) => {
                     "password": signupPassword
                 });
 
-                setIsLogin(true)
+                dispatch({ type: 'SET_IS_LOGIN', payload: true })
             }
             else {
                 setError('Password And Confirm Password Should Be Same!');

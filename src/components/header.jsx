@@ -1,6 +1,9 @@
 import userProfile from '../img/profile/picture.jpg'
 import {useState} from "react";
-const Header = ({ sidebarToggle, setSidebarToggle, userData }) => {
+import {useAppContext} from "../context/chatContextAPI";
+const Header = () => {
+    const { state, dispatch } = useAppContext();
+
     const [profilePopup, setProfilePopup] = useState(false);
     const [notificationPopup, setNotificationPopup] = useState(false);
 
@@ -18,7 +21,7 @@ const Header = ({ sidebarToggle, setSidebarToggle, userData }) => {
         <>
             <header className="fixed top-0 z-30 w-full bg-blue-300 drop-shadow-lg">
                 <div className="flex justify-between items-center z-20 px-4 lg:px-8">
-                    <div onClick={(e) => setSidebarToggle(!sidebarToggle) } className={"cursor-pointer"}>
+                    <div onClick={(e) => dispatch({ type: 'SET_SIDEBAR_TOGGLE' })} className={"cursor-pointer"}>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                              stroke="white" className="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round"
@@ -97,7 +100,7 @@ const Header = ({ sidebarToggle, setSidebarToggle, userData }) => {
                                     </div>
                                     <ul className="relative rounded text-sm text-gray-700 p-1" aria-labelledby="profile-button">
                                         <li>
-                                            <span className="block px-3 py-2 font-normal text-black rounded-lg hover:bg-gray-100 cursor-pointer">{userData.username}</span>
+                                            <span className="block px-3 py-2 font-normal text-black rounded-lg hover:bg-gray-100 cursor-pointer">{state.userData.username}</span>
                                         </li>
                                         <li>
                                             <span className="block px-3 py-2 font-normal text-black rounded-lg hover:bg-gray-100 cursor-pointer">Dashboard</span>

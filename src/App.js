@@ -2,57 +2,51 @@ import './App.css';
 import Header from "./components/header";
 import Sidebar from "./components/sidebar";
 import Chat from "./components/chat";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import Login from "./components/login";
 import axios from "axios";
+import {useAppContext} from "./context/chatContextAPI";
 
 function App() {
-    const [rooms, setRooms] = useState([]);
-    const [sidebarToggle, setSidebarToggle] = useState(false);
-    const [isLogin, setIsLogin] = useState(false);
-    const [updateToggle, setUpdateToggle] = useState(false);
-    const [errors, setErrors] = useState("");
-    const [message, setMessage] = useState([]);
-    const [messages, setMessages] = useState([]);
-    const [userData, setUserData] = useState('');
-    const [roomClick, setRoomClick] = useState('');
 
+    const { state, dispatch } = useAppContext();
 
     useEffect(() => {
         axios.get("http://localhost:8000/room/")
-            .then(res => setRooms(res.data))
-            .catch(err => setErrors(err.message))
-    }, [updateToggle])
+            .then(res =>  dispatch({ type: 'SET_ROOMS', payload: res.data }))
+            .catch(err => dispatch({ type: 'SET_ERRORS', payload: err }))
+    }, [state.updateToggle])
 
     useEffect( () => {
-        setMessages( [...messages])
-        axios.get(`http://localhost:8000/message/?data=${roomClick}`)
-            .then(res => setMessages(res.data))
-            .catch(err => setErrors(err.message))
-    }, [roomClick])
+        dispatch({ type: 'SET_MESSAGES', payload: [...state.messages] })
+        axios.get(`http://localhost:8000/message/?data=${state.roomClick}`)
+            .then(res => dispatch({ type: 'SET_MESSAGES', payload: res.data }))
+            .catch(err => dispatch({ type: 'SET_ERRORS', payload: err.messages }))
+    }, [state.roomClick])
 
     const addMessage = (data) => {
-        setMessage( [...message, data={...data, room:roomClick, sent_by:userData.username}])
+        dispatch({ type: 'ADD_MESSAGE', payload: [...state.message, data={...data, room:state.roomClick, sent_by:state.userData.username}] })
         axios.post("http://localhost:8000/message/", data)
         .then(res => {
-            setMessage([...message, res.data])
-            setUpdateToggle(prevState => !prevState);
+            dispatch({ type: 'ADD_MESSAGE', payload: res.data })
+            dispatch({ type: 'SET_UPDATE_TOGGLE', payload: res.data })
         })
         .catch(err => {
-            setErrors((err.message))
-            setMessage([...messages])
+            dispatch({ type: 'SET_ERRORS', payload: err.messages })
+            dispatch({ type: 'SET_MESSAGES', payload: [...state.messages] })
         })
     }
 
     return (
+
         <div>
-            {!isLogin ? <Login setIsLogin={setIsLogin} setUserData={setUserData}/> :
+            {!state.isLogin ? <Login/> :
                 <>
                     <div className={"flex flex-col h-screen w-full"}>
-                        < Header sidebarToggle={sidebarToggle} setSidebarToggle={setSidebarToggle} userData={userData}/>
-                        < Chat sidebarToggle={sidebarToggle} setSidebarToggle={setSidebarToggle} userData={userData} roomClick={roomClick} addMessage={ addMessage } messages={messages} updateToggle={updateToggle} setUpdateToggle={setUpdateToggle}/>
+                        < Header />
+                        < Chat addMessage={ addMessage }/>
                     </div>
-                    <Sidebar rooms = { rooms } sidebarToggle={sidebarToggle} setSidebarToggle={setSidebarToggle}  setRoomClick={setRoomClick}/>
+                    <Sidebar/>
                 </>
             }
         </div>
