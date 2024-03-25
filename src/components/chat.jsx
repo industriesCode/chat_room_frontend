@@ -5,15 +5,15 @@ import {useAppContext} from "../context/chatContextAPI";
 const Chat = ({addMessage}) => {
     const { register, handleSubmit, reset } = useForm();
     const { state, dispatch } = useAppContext();
-
+    console.log(state)
     return(
-        <div className={"flex flex-col z-20 w-full h-full p-5"} onClick={(e) => dispatch({ type: 'SET_SIDEBAR_TOGGLE' }) }>
-            <div className={"w-full h-full pt-10 overflow-y-auto"}>
+        <div className={"flex flex-col z-20 w-full h-full p-5"} onClick={(e) => !state.sidebarToggle && dispatch({ type: 'SET_SIDEBAR_TOGGLE' }) }>
+            <div className={"w-full h-full pt-10 overflow-y-auto"} >
                 <div className={"fixed z-20 flex flex-col md:p-5 md:ml-5 w-max"}>
                     <span className={"tracking-wider font-semibold custom-text-shadow text-gray-500 p-1 rounded"}>{ state.roomClick }</span>
                     <hr/>
                 </div>
-                <div className="fixed top-0 left-0 z-10 w-full h-20 md:h-28 bg-gradient-to-t from-white to-white pointer-events-none"></div>
+                <div className="fixed top-0 left-0 z-10 w-full h-20 md:h-28 bg-gradient-to-t from-white to-white p  ointer-events-none"></div>
                 <div className={"h-10 md:h-20"}></div>
 
                 {state.messages.map((message, index) => (
