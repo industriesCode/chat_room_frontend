@@ -19,6 +19,11 @@ const Sidebar = () => {
         dispatch({ type: 'SET_ROOM_CLICK', payload: data })
     }
 
+    const goToHome = () => {
+        dispatch({ type: 'SET_SIDEBAR_TOGGLE', payload: false })
+        dispatch({ type: 'SET_ROOM_CLICK', payload: '' })
+    }
+
     const deleteRoom = (name) => {
         const allRooms = [...state.rooms.today, ...state.rooms.yesterday, ...state.rooms.older];
         const updatedRooms = allRooms.filter(room => room.name !== name);
@@ -57,7 +62,7 @@ const Sidebar = () => {
                 <div className="relative text-center py-6 pt-0">
                     {/*Mobile Menu Button*/}
                     <div className="pt-5">
-                        <img src={transparentLogo} alt="Logo" className="mx-auto w-12 animate-pulse" />
+                        <img src={transparentLogo} alt="Logo" className="mx-auto w-12 animate-pulse cursor-pointer" onClick={() => goToHome()} />
                         <div className="tracking-wider">
                             <h1 className="text-sm font-semibold text-gray-500">LETS CHAT</h1>
                             <small className="text-xs font-normal text-gray-400 whitespace-pre-line flex items-center justify-center gap-0">I think talking things out is <br/>therapeutic</small>

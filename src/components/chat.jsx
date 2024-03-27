@@ -77,7 +77,7 @@ const Chat = ({addMessage}) => {
                 ) : (
                     // Render this div if roomClick value is an empty string
                     <div className="flex justify-center items-center w-full h-full">
-                        <img src={chatLogo} alt="chat-logo" className="h-96"/>
+                        <img src={chatLogo} alt="chat-logo" className="h-72"/>
                     </div>
                 )
             }
