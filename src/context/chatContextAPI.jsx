@@ -9,8 +9,8 @@ const initialState = {
     errors: "",
     message: [],
     messages: [],
-    userData: '',
-    roomClick: ''
+    roomClick: '',
+    sendMessageToggle: false,
 };
 
 function reducer(state, action) {
@@ -19,6 +19,8 @@ function reducer(state, action) {
             return { ...state, rooms: action.payload };
         case 'SET_SIDEBAR_TOGGLE':
             return { ...state, sidebarToggle: !state.sidebarToggle };
+        case 'SET_SEND_MESSAGE_TOGGLE':
+            return { ...state, sendMessageToggle: !state.sendMessageToggle };
         case 'SET_IS_LOGIN':
             return { ...state, isLogin: action.payload };
         case 'SET_UPDATE_TOGGLE':

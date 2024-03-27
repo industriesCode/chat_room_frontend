@@ -3,6 +3,7 @@ import {useState} from "react";
 import {useAppContext} from "../context/chatContextAPI";
 const Header = () => {
     const { state, dispatch } = useAppContext();
+    const username = localStorage.getItem('userName');
 
     const [profilePopup, setProfilePopup] = useState(false);
     const [notificationPopup, setNotificationPopup] = useState(false);
@@ -15,6 +16,17 @@ const Header = () => {
     const onProfile = () => {
         setNotificationPopup(false);
         setProfilePopup(!profilePopup);
+    };
+
+    // Function to handle sign out
+    const handleSignOut = () => {
+        // Remove access token from localStorage
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('userName');
+
+        // Dispatch action to set login state to false and clear user data
+        dispatch({ type: 'SET_IS_LOGIN', payload: false });
+        dispatch({ type: 'SET_USER_DATA', payload: '' });
     };
 
     return(
@@ -100,13 +112,13 @@ const Header = () => {
                                     </div>
                                     <ul className="relative rounded text-sm text-gray-700 p-1" aria-labelledby="profile-button">
                                         <li>
-                                            <span className="block px-3 py-2 font-normal text-black rounded-lg hover:bg-gray-100 cursor-pointer">{state.userData.username}</span>
+                                            <span className="block px-3 py-2 font-normal text-black rounded-lg hover:bg-gray-100 cursor-pointer">{username}</span>
                                         </li>
                                         <li>
                                             <span className="block px-3 py-2 font-normal text-black rounded-lg hover:bg-gray-100 cursor-pointer">Dashboard</span>
                                         </li>
                                         <li>
-                                            <span className="block px-3 py-2 font-normal text-black rounded-lg hover:bg-gray-100 cursor-pointer">Sign Out</span>
+                                            <span className="block px-3 py-2 font-normal text-black rounded-lg hover:bg-gray-100 cursor-pointer" onClick={handleSignOut}>Sign Out</span>
                                         </li>
                                     </ul>
                                 </div>

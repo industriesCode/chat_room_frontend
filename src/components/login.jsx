@@ -37,8 +37,11 @@ const Login = () => {
                 password,
             });
 
+            // Store user data and access token in localStorage
+            localStorage.setItem('userName', resp.data.user['username']);
+            localStorage.setItem('accessToken', resp.data.access);
+
             dispatch({ type: 'SET_USER_DATA', payload: resp.data.user })
-            dispatch({ type: 'SET_IS_LOGIN', payload: true })
 
         } catch (error) {
             setError('Invalid username or password');
